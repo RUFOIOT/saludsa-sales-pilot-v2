@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agente Multifunción de Ventas — Salud S.A.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #020408;
+    --bg2: #070d14;
+    --blue: #00d4ff;
+    --blue-dim: #0099cc;
+    --gold: #f5c842;
+    --gold-dim: #c9a020;
+    --green: #00ff88;
+    --red: #ff3d5a;
+    --white: #f0f6ff;
+    --gray: #8899aa;
+    --card: rgba(0,180,255,0.04);
+    --border: rgba(0,180,255,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(2,4,8,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--blue); }
+  .nav-badge {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+    color: #000; font-weight: 700; font-size: 0.7rem; padding: 4px 12px; border-radius: 20px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 40px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,212,255,0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245,200,66,0.06) 0%, transparent 60%),
+      url('assets/2026-03-15-hero-agent.png') center center / cover no-repeat;
+  }
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(2,4,8,0.5) 0%, rgba(2,4,8,0.3) 40%, rgba(2,4,8,0.9) 100%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 50px; padding: 6px 18px; margin-bottom: 32px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue);
+  }
+  .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 700; line-height: 1.05; margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--blue), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-quote {
+    font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.7;
+    color: rgba(240,246,255,0.7); max-width: 720px; margin: 0 auto 48px;
+    font-style: italic;
+    border-left: 3px solid var(--blue);
+    padding-left: 20px; text-align: left;
+  }
+  .hero-quote strong { color: var(--white); font-style: normal; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, var(--blue), #0077aa);
+    color: #000; font-weight: 700; font-size: 1rem;
+    padding: 16px 36px; border-radius: 50px;
+    text-decoration: none; cursor: pointer; border: none;
+    box-shadow: 0 0 40px rgba(0,212,255,0.4);
+    transition: all 0.3s;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,212,255,0.6); }
+  .hero-stats {
+    display: flex; gap: 48px; justify-content: center; margin-top: 64px;
+    flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.4rem; font-weight: 700; color: var(--gold);
+    text-shadow: 0 0 20px rgba(245,200,66,0.4);
+  }
+  .hero-stat .label { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 40px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+    line-height: 1.15; margin-bottom: 20px;
+  }
+  .section-subtitle {
+    font-size: 1.1rem; color: var(--gray); line-height: 1.7;
+    max-width: 650px; margin-bottom: 64px;
+  }
+
+  /* ─── PAIN ─── */
+  .pain-section { background: var(--bg2); }
+  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .pain-card {
+    background: rgba(255,61,90,0.06); border: 1px solid rgba(255,61,90,0.2);
+    border-radius: 16px; padding: 32px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .pain-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(255,61,90,0.15); }
+  .pain-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3rem; font-weight: 700; color: rgba(255,61,90,0.3);
+    line-height: 1; margin-bottom: 16px;
+  }
+  .pain-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; color: var(--white); }
+  .pain-card p { font-size: 0.95rem; color: var(--gray); line-height: 1.6; }
+  .pain-consequence {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,61,90,0.1); border: 1px solid rgba(255,61,90,0.25);
+    border-radius: 20px; padding: 4px 12px; font-size: 0.78rem;
+    color: #ff7a8a; margin-top: 12px;
+  }
+
+  /* ─── FUNCTIONS ─── */
+  .functions-section { background: var(--bg); }
+  .functions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px; }
+  .fn-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 36px;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .fn-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--gold));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .fn-card:hover::before { opacity: 1; }
+  .fn-card:hover { transform: translateY(-6px); box-shadow: 0 30px 80px rgba(0,212,255,0.1); border-color: rgba(0,212,255,0.3); }
+  .fn-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.05));
+    border: 1px solid rgba(0,212,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin-bottom: 20px;
+  }
+  .fn-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+  .fn-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+  .fn-list { list-style: none; }
+  .fn-list li {
+    font-size: 0.88rem; color: rgba(240,246,255,0.8); padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .fn-list li::before { content: '→'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+
+  /* ─── OPPORTUNITIES ─── */
+  .opp-section { background: var(--bg2); }
+  .opp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .opp-card {
+    background: rgba(0,255,136,0.04); border: 1px solid rgba(0,255,136,0.15);
+    border-radius: 16px; padding: 32px;
+    transition: all 0.3s;
+  }
+  .opp-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,255,136,0.1); }
+  .opp-icon { font-size: 2rem; margin-bottom: 16px; }
+  .opp-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--green); margin-bottom: 12px; }
+  .opp-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+  .opp-benefits { list-style: none; }
+  .opp-benefits li {
+    font-size: 0.85rem; color: rgba(0,255,136,0.8); padding: 4px 0;
+    display: flex; gap: 8px; align-items: center;
+  }
+  .opp-benefits li::before { content: '✔'; color: var(--green); flex-shrink: 0; }
+
+  /* ─── OUTPUT EXAMPLE ─── */
+  .output-section { background: var(--bg); }
+  .output-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 768px) { .output-grid { grid-template-columns: 1fr; } }
+  .output-card {
+    background: rgba(10,20,35,0.8); border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 0 60px rgba(0,212,255,0.08);
+  }
+  .output-header {
+    background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(245,200,66,0.1));
+    padding: 20px 28px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .output-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .output-name { font-weight: 700; font-size: 0.95rem; }
+  .output-role { font-size: 0.78rem; color: var(--gray); }
+  .output-body { padding: 28px; }
+  .output-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 16px;
+  }
+  .output-row:last-child { border-bottom: none; }
+  .output-key { font-size: 0.78rem; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; }
+  .output-val { font-size: 0.88rem; color: var(--white); text-align: right; }
+  .plan-badge {
+    display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+    color: #000; font-weight: 700; font-size: 0.8rem; padding: 4px 12px; border-radius: 20px;
+  }
+  .score-bar { display: flex; align-items: center; gap: 10px; }
+  .score-fill { height: 6px; background: linear-gradient(90deg, var(--green), var(--blue)); border-radius: 3px; }
+  .score-text { font-size: 0.85rem; color: var(--green); font-weight: 700; }
+
+  /* ─── STACK ─── */
+  .stack-section { background: var(--bg2); }
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .stack-card {
+    background: rgba(0,212,255,0.04); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px; text-align: center;
+    transition: all 0.3s;
+  }
+  .stack-card:hover { border-color: rgba(0,212,255,0.4); transform: translateY(-4px); }
+  .stack-logo { font-size: 2.4rem; margin-bottom: 14px; }
+  .stack-name { font-weight: 700; font-size: 1rem; color: var(--blue); margin-bottom: 6px; }
+  .stack-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
+  /* ─── PRICING ─── */
+  .pricing-section { background: var(--bg); }
+  .pricing-card {
+    max-width: 700px; margin: 0 auto;
+    background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(245,200,66,0.04));
+    border: 1px solid rgba(0,212,255,0.3); border-radius: 28px; padding: 56px;
+    text-align: center; position: relative; overflow: hidden;
+    box-shadow: 0 0 100px rgba(0,212,255,0.15);
+  }
+  .pricing-card::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(0,212,255,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .pricing-label {
+    display: inline-block; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 50px; padding: 6px 20px; font-size: 0.78rem; color: var(--blue);
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .pricing-amount {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 6rem); font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(245,200,66,0.4);
+    line-height: 1;
+  }
+  .pricing-currency { font-size: 2rem; vertical-align: top; margin-top: 12px; display: inline-block; }
+  .pricing-desc { font-size: 1rem; color: var(--gray); margin: 16px 0 40px; }
+  .pricing-features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left; margin-bottom: 40px; }
+  @media (max-width: 600px) { .pricing-features { grid-template-columns: 1fr; } }
+  .pricing-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.9rem; color: rgba(240,246,255,0.85);
+  }
+  .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .pricing-note { font-size: 0.8rem; color: var(--gray); font-style: italic; }
+
+  /* ─── TIMELINE ─── */
+  .timeline-section { background: var(--bg2); }
+  .timeline-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, rgba(245,200,66,0.12), rgba(0,212,255,0.08));
+    border: 1px solid rgba(245,200,66,0.3); border-radius: 50px;
+    padding: 12px 28px; font-size: 1.1rem; font-weight: 700; color: var(--gold);
+    margin-bottom: 48px;
+  }
+  .timeline-phases { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  @media (max-width: 768px) { .timeline-phases { grid-template-columns: 1fr; } }
+  .phase-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px;
+  }
+  .phase-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem; font-weight: 700;
+    color: rgba(0,212,255,0.2); margin-bottom: 12px;
+  }
+  .phase-weeks { font-size: 0.75rem; color: var(--blue); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .phase-card h4 { font-weight: 700; font-size: 1rem; margin-bottom: 12px; }
+  .phase-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.6; }
+  .timeline-needs {
+    margin-top: 48px; background: rgba(245,200,66,0.06); border: 1px solid rgba(245,200,66,0.2);
+    border-radius: 16px; padding: 28px;
+  }
+  .timeline-needs h4 { font-weight: 700; margin-bottom: 16px; color: var(--gold); }
+  .needs-list { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; }
+  .needs-list li {
+    background: rgba(245,200,66,0.08); border: 1px solid rgba(245,200,66,0.2);
+    border-radius: 8px; padding: 8px 16px; font-size: 0.85rem; color: var(--white);
+  }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    background: var(--bg); text-align: center; padding: 120px 40px;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,212,255,0.08) 0%, transparent 70%);
+  }
+  .cta-section .container { position: relative; z-index: 1; }
+  .cta-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem); font-weight: 700;
+    margin-bottom: 20px; line-height: 1.1;
+  }
+  .cta-sub { font-size: 1.1rem; color: var(--gray); margin-bottom: 48px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+    color: #000; font-weight: 700; font-size: 1rem;
+    padding: 16px 40px; border-radius: 50px; border: none; cursor: pointer;
+    box-shadow: 0 0 40px rgba(245,200,66,0.3);
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(245,200,66,0.5); }
+  .btn-secondary {
+    background: transparent; color: var(--white); font-weight: 600; font-size: 1rem;
+    padding: 16px 40px; border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg2); border-top: 1px solid var(--border);
+    padding: 32px 40px; text-align: center;
+    font-size: 0.8rem; color: var(--gray);
+  }
+
+  /* ─── GLOWS & DECO ─── */
+  .glow-line {
+    width: 100px; height: 2px; margin: 0 auto 40px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SALUD S.A. × IA</div>
+  <div class="nav-badge">Sales Pilot v2</div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span></span>
+      Agente Multifunción de Ventas
+    </div>
+    <h1>
+      El primer<br>
+      <span class="highlight">copiloto de ventas</span><br>
+      con IA para seguros
+    </h1>
+    <p class="hero-quote">
+      "Hoy el principal dolor en las ventas no es la falta de leads,
+      sino la <strong>incapacidad de gestionarlos con la velocidad,
+      personalización e inteligencia</strong> que exige el cliente moderno."
+    </p>
+    <a class="hero-cta" href="#pricing">Ver propuesta →</a>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">3</div>
+        <div class="label">Funciones integradas</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">24/7</div>
+        <div class="label">Atención automática</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">12</div>
+        <div class="label">Semanas a resultados</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">100%</div>
+        <div class="label">Hiperpersonalizado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PAIN ═══ -->
+<section class="pain-section">
+  <div class="container">
+    <div class="section-eyebrow">El problema</div>
+    <h2 class="section-title">3 ineficiencias críticas<br>en el proceso actual</h2>
+    <p class="section-subtitle">Estas brechas representan una oportunidad de crecimiento inmediata para Salud S.A.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-num">01</div>
+        <h3>Baja conversión de leads digitales</h3>
+        <p>Los leads llegan desde campañas y formularios, pero la atención no siempre es inmediata. Las oportunidades se enfrían antes de ser contactadas.</p>
+        <div class="pain-consequence">📉 Leads desperdiciados · Baja conversión digital</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">02</div>
+        <h3>Cotizaciones genéricas poco diferenciadas</h3>
+        <p>Las cotizaciones son relativamente estándar y no consideran el contexto personal o profesional del prospecto. No conectan emocionalmente.</p>
+        <div class="pain-consequence">📉 Menor impacto · Difícil diferenciación frente a la competencia</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03</div>
+        <h3>Seguimiento comercial poco optimizado</h3>
+        <p>Los asesores deben revisar manualmente el CRM, recordar seguimientos y analizar el perfil del cliente, consumiendo tiempo valioso.</p>
+        <div class="pain-consequence">📉 Oportunidades perdidas · Baja productividad comercial</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FUNCTIONS ═══ -->
+<section class="functions-section">
+  <div class="container">
+    <div class="section-eyebrow">La solución</div>
+    <h2 class="section-title">3 funciones que transforman<br>el ciclo de venta</h2>
+    <p class="section-subtitle">Un agente único que orquesta inteligencia, velocidad y personalización en cada etapa del proceso.</p>
+
+    <div class="functions-grid">
+      <!-- Función 1 -->
+      <div class="fn-card">
+        <div class="fn-icon">🧠</div>
+        <h3>Función 1 — Lead & Assistant Intelligence</h3>
+        <p>El agente analiza al prospecto en profundidad, generando un briefing completo y un argumento de venta personalizado antes de que el asesor lo contacte.</p>
+        <ul class="fn-list">
+          <li>Scraping de LinkedIn, web y redes sociales</li>
+          <li>Análisis de empresa, cargo e industria</li>
+          <li>Detección de probabilidad de compra</li>
+          <li>Argumento de venta personalizado</li>
+          <li>Integración directa con HubSpot</li>
+        </ul>
+      </div>
+      <!-- Función 2 -->
+      <div class="fn-card">
+        <div class="fn-icon">⚡</div>
+        <h3>Función 2 — Agente de Conversión 24/7</h3>
+        <p>Se activa automáticamente cuando un prospecto llena un formulario, solicita una cotización o interactúa por WhatsApp — sin tiempos de espera.</p>
+        <ul class="fn-list">
+          <li>Respuesta inmediata (0 minutos de espera)</li>
+          <li>Preguntas de calificación inteligentes</li>
+          <li>Recomendación del plan más adecuado</li>
+          <li>Agenda llamada con asesor humano</li>
+          <li>Crea lead en HubSpot automáticamente</li>
+        </ul>
+        <p style="margin-top:16px;font-size:0.82rem;color:var(--gold);background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.2);border-radius:8px;padding:10px 14px;">
+          ⚡ Un lead que espera más de 5 minutos tiene una probabilidad de cierre significativamente menor.
+        </p>
+      </div>
+      <!-- Función 3 -->
+      <div class="fn-card">
+        <div class="fn-icon">🎯</div>
+        <h3>Función 3 — Hiperpersonalización de Ofertas</h3>
+        <p>Genera cotizaciones 100% personalizadas a partir del perfil completo del cliente, creando una landing page única para cada prospecto.</p>
+        <ul class="fn-list">
+          <li>Perfil familiar: estado civil, dependientes</li>
+          <li>Estilo de vida: deporte, viajes, hábitos</li>
+          <li>Nivel de riesgo laboral</li>
+          <li>Cobertura actual de salud</li>
+          <li>Landing page personalizada por cliente</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OUTPUT EXAMPLES ═══ -->
+<section class="output-section">
+  <div class="container">
+    <div class="section-eyebrow">Output real del agente</div>
+    <h2 class="section-title">Cotizaciones hiperpersonalizadas</h2>
+    <p class="section-subtitle">Así es como el agente presenta una propuesta. El cliente percibe que el plan fue diseñado específicamente para él.</p>
+
+    <div class="output-grid">
+      <!-- Ejemplo 1 -->
+      <div class="output-card">
+        <div class="output-header">
+          <div class="output-avatar">👨‍💼</div>
+          <div>
+            <div class="output-name">Carlos Mendoza</div>
+            <div class="output-role">Director Comercial · TechCorp S.A.</div>
+          </div>
+        </div>
+        <div class="output-body">
+          <div class="output-row">
+            <span class="output-key">Perfil</span>
+            <span class="output-val">Ejecutivo, 42 años, casado, 2 hijos</span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Estilo de vida</span>
+            <span class="output-val">Viaja frecuentemente · Practica ciclismo</span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Riesgo laboral</span>
+            <span class="output-val">Alto (viajes internacionales constantes)</span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Plan recomendado</span>
+            <span class="output-val"><span class="plan-badge">Plan Pro · Red Abierta</span></span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Prob. de cierre</span>
+            <span class="output-val">
+              <div class="score-bar">
+                <div class="score-fill" style="width:82px"></div>
+                <span class="score-text">82%</span>
+              </div>
+            </span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Argumento clave</span>
+            <span class="output-val">Cobertura internacional para tu familia mientras viajas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ejemplo 2 -->
+      <div class="output-card">
+        <div class="output-header">
+          <div class="output-avatar">👩‍⚕️</div>
+          <div>
+            <div class="output-name">Daniela Vásquez</div>
+            <div class="output-role">Médico Independiente · Clínica Privada</div>
+          </div>
+        </div>
+        <div class="output-body">
+          <div class="output-row">
+            <span class="output-key">Perfil</span>
+            <span class="output-val">Profesional, 35 años, soltera, sin hijos</span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Estilo de vida</span>
+            <span class="output-val">Fitness diario · No viaja frecuentemente</span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Riesgo laboral</span>
+            <span class="output-val">Medio (exposición biológica en clínica)</span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Plan recomendado</span>
+            <span class="output-val"><span class="plan-badge">Plan Médico · Elite</span></span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Prob. de cierre</span>
+            <span class="output-val">
+              <div class="score-bar">
+                <div class="score-fill" style="width:74px"></div>
+                <span class="score-text">74%</span>
+              </div>
+            </span>
+          </div>
+          <div class="output-row">
+            <span class="output-key">Argumento clave</span>
+            <span class="output-val">Protección especializada adaptada a tu profesión médica</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OPPORTUNITIES ═══ -->
+<section class="opp-section">
+  <div class="container">
+    <div class="section-eyebrow">La oportunidad</div>
+    <h2 class="section-title">3 ventajas competitivas<br>que este agente habilita</h2>
+    <p class="section-subtitle">La IA agéntica no es una mejora incremental — es un cambio estructural en cómo se vende.</p>
+    <div class="opp-grid">
+      <div class="opp-card">
+        <div class="opp-icon">🚀</div>
+        <h3>Hiperpersonalización de ventas</h3>
+        <p>El agente analiza LinkedIn y redes del prospecto para crear propuestas con conexión emocional real.</p>
+        <ul class="opp-benefits">
+          <li>Cotizaciones personalizadas automáticas</li>
+          <li>Argumentos adaptados al cliente</li>
+          <li>Mayor conexión emocional</li>
+        </ul>
+      </div>
+      <div class="opp-card">
+        <div class="opp-icon">⚡</div>
+        <h3>Atención inmediata e inteligente</h3>
+        <p>Conectado a HubSpot, responde automáticamente y prioriza los leads con mayor probabilidad de compra.</p>
+        <ul class="opp-benefits">
+          <li>Velocidad de respuesta inigualable</li>
+          <li>Mayor conversión digital</li>
+          <li>Zero leads perdidos por demora</li>
+        </ul>
+      </div>
+      <div class="opp-card">
+        <div class="opp-icon">🧭</div>
+        <h3>Asistencia comercial inteligente</h3>
+        <p>El asesor tiene toda la inteligencia disponible desde un comando en Telegram — CRM, briefing, sugerencias.</p>
+        <ul class="opp-benefits">
+          <li>Asesores más productivos</li>
+          <li>Mejor calidad de venta</li>
+          <li>Menos oportunidades perdidas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STACK ═══ -->
+<section class="stack-section">
+  <div class="container">
+    <div class="section-eyebrow">Stack tecnológico</div>
+    <h2 class="section-title">Construido sobre la<br>infraestructura más avanzada</h2>
+    <p class="section-subtitle">Cada componente fue elegido por su velocidad, respaldo y capacidad de escalar con tu negocio.</p>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-logo">🐾</div>
+        <div class="stack-name">OpenClaw</div>
+        <div class="stack-desc">Orquestador agéntico. Conecta todas las piezas: CRM, WhatsApp, correo y scraping desde una sola capa de inteligencia.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-logo">🤖</div>
+        <div class="stack-name">Claude Sonnet / Opus</div>
+        <div class="stack-desc">Motor de razonamiento y personalización. Genera briefings, argumentos de venta y respuestas consultivas con precisión quirúrgica.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-logo">✨</div>
+        <div class="stack-name">Gemini 2.5</div>
+        <div class="stack-desc">Velocidad y escala. Procesamiento masivo de datos, scraping y generación de contenido en tiempo real.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-logo">📊</div>
+        <div class="stack-name">HubSpot CRM</div>
+        <div class="stack-desc">Integración nativa. Todos los leads, seguimientos y datos del cliente se sincronizan automáticamente.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-logo">💬</div>
+        <div class="stack-name">WhatsApp + Telegram</div>
+        <div class="stack-desc">Canal de contacto con el cliente y comando central para el asesor. Todo desde su smartphone.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-eyebrow">Inversión</div>
+    <h2 class="section-title" style="text-align:center;margin-bottom:48px;">Una sola inversión.<br>Tres agentes en uno.</h2>
+    <div class="pricing-card">
+      <div class="pricing-label">Agente Multifunción de Ventas · Salud S.A.</div>
+      <div class="pricing-amount">
+        <span class="pricing-currency">$</span>19.500
+      </div>
+      <p class="pricing-desc">Implementación completa · Licencia anual · Soporte incluido</p>
+      <ul class="pricing-features">
+        <li>Lead Intelligence Agent (Función 1)</li>
+        <li>Agente de Conversión 24/7 (Función 2)</li>
+        <li>Hiperpersonalización de Ofertas (Función 3)</li>
+        <li>Integración HubSpot + WhatsApp</li>
+        <li>Stack Claude + Gemini + OpenClaw</li>
+        <li>Dashboard de seguimiento comercial</li>
+        <li>Capacitación del equipo de ventas</li>
+        <li>Soporte técnico durante implementación</li>
+      </ul>
+      <p class="pricing-note">* Equivalente a menos de $2 por lead gestionado al mes (base: 1000 leads/mes)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="section-eyebrow">Implementación</div>
+    <h2 class="section-title">De 0 a resultados<br>en 12 semanas</h2>
+
+    <div class="timeline-badge">
+      ⏱ 0 → Resultados medibles en 12 semanas
+    </div>
+
+    <div class="timeline-phases">
+      <div class="phase-card">
+        <div class="phase-num">01</div>
+        <div class="phase-weeks">Semanas 1–4</div>
+        <h4>Fundaciones</h4>
+        <p>Integración con HubSpot, configuración de canales WhatsApp/Telegram, setup del stack Claude + Gemini + OpenClaw.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">02</div>
+        <div class="phase-weeks">Semanas 5–8</div>
+        <h4>Piloto Controlado</h4>
+        <p>Activación de las 3 funciones con un grupo de leads reales. Ajuste fino de argumentos, flujos y personalizaciones.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">03</div>
+        <div class="phase-weeks">Semanas 9–12</div>
+        <h4>Escalado Total</h4>
+        <p>Despliegue completo a todo el equipo de ventas. Capacitación, optimización y primeros resultados documentados.</p>
+      </div>
+    </div>
+
+    <div class="timeline-needs">
+      <h4>✱ Lo que necesitas de Salud S.A.</h4>
+      <ul class="needs-list">
+        <li>Acceso API a HubSpot</li>
+        <li>Número WhatsApp Business</li>
+        <li>Base de datos de leads activos</li>
+        <li>1 asesor comercial de punto focal</li>
+        <li>Validación de flujos de venta</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="glow-line"></div>
+    <h2 class="cta-title">El primer copiloto de ventas<br>con IA para seguros<br><span style="background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">en Latinoamérica</span></h2>
+    <p class="cta-sub">Salud S.A. puede liderar este cambio. La tecnología está lista.</p>
+    <div class="cta-buttons">
+      <button class="btn-primary">Agendar demo →</button>
+      <button class="btn-secondary">Ver más detalles</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Propuesta confidencial preparada para Salud S.A. · 2026 · Powered by OpenClaw + Claude + Gemini</p>
+</footer>
+
+</body>
+</html>
