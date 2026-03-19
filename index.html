@@ -246,17 +246,7 @@
   .score-text { font-size: 0.85rem; color: var(--green); font-weight: 700; }
 
   /* ─── STACK ─── */
-  .stack-section { background: var(--bg2); }
-  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-  .stack-card {
-    background: rgba(0,212,255,0.04); border: 1px solid var(--border);
-    border-radius: 16px; padding: 28px; text-align: center;
-    transition: all 0.3s;
-  }
-  .stack-card:hover { border-color: rgba(0,212,255,0.4); transform: translateY(-4px); }
-  .stack-logo { font-size: 2.4rem; margin-bottom: 14px; }
-  .stack-name { font-weight: 700; font-size: 1rem; color: var(--blue); margin-bottom: 6px; }
-  .stack-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
 
   /* ─── PRICING ─── */
   .pricing-section { background: var(--bg); }
@@ -406,22 +396,23 @@
     <a class="hero-cta" href="#pricing">Ver propuesta →</a>
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="num">3</div>
-        <div class="label">Funciones integradas</div>
+        <div class="num">9% → 20%</div>
+        <div class="label">Conversión de Leads</div>
       </div>
       <div class="hero-stat">
-        <div class="num">24/7</div>
-        <div class="label">Atención automática</div>
+        <div class="num">20%</div>
+        <div class="label">Productividad de Asesores</div>
       </div>
       <div class="hero-stat">
-        <div class="num">12</div>
-        <div class="label">Semanas a resultados</div>
+        <div class="num">2000%</div>
+        <div class="label">ROI Estimado</div>
       </div>
       <div class="hero-stat">
-        <div class="num">100%</div>
-        <div class="label">Hiperpersonalizado</div>
+        <div class="num">+ $408k</div>
+        <div class="label">Retorno Anual Estimado</div>
       </div>
     </div>
+    <p class="hero-subtext" style="font-size: 0.9rem; color: var(--gray); margin-top: 24px;">Un incremento del 10% sobre $340,000 al mes genera $408,000 adicionales en el año.</p>
   </div>
 </section>
 
@@ -587,7 +578,7 @@
           </div>
           <div class="output-row">
             <span class="output-key">Plan recomendado</span>
-            <span class="output-val"><span class="plan-badge">Plan Médico · Elite</span></span>
+                        <span class="output-val"><span class="plan-badge">Plan Sky70</span></span>
           </div>
           <div class="output-row">
             <span class="output-key">Prob. de cierre</span>
@@ -649,41 +640,74 @@
   </div>
 </section>
 
-<!-- ═══ STACK ═══ -->
-<section class="stack-section">
+
+
+<section class="flow-section">
   <div class="container">
-    <div class="section-eyebrow">Stack tecnológico</div>
-    <h2 class="section-title">Construido sobre la<br>infraestructura más avanzada</h2>
-    <p class="section-subtitle">Cada componente fue elegido por su velocidad, respaldo y capacidad de escalar con tu negocio.</p>
-    <div class="stack-grid">
-      <div class="stack-card">
-        <div class="stack-logo">🐾</div>
-        <div class="stack-name">OpenClaw</div>
-        <div class="stack-desc">Orquestador agéntico. Conecta todas las piezas: CRM, WhatsApp, correo y scraping desde una sola capa de inteligencia.</div>
+    <div class="section-eyebrow">El Flujo de Venta IA</div>
+    <h2 class="section-title">Así se ve la nueva<br>cadena de valor comercial</h2>
+    <p class="section-subtitle">El agente automatiza el 80% de las tareas repetitivas, liberando a tus asesores para cerrar más.</p>
+    <div class="flow-grid">
+      <div class="flow-step">
+        <div class="flow-icon">1️⃣</div>
+        <p>Leads Digitales</p>
       </div>
-      <div class="stack-card">
-        <div class="stack-logo">🤖</div>
-        <div class="stack-name">Claude Sonnet / Opus</div>
-        <div class="stack-desc">Motor de razonamiento y personalización. Genera briefings, argumentos de venta y respuestas consultivas con precisión quirúrgica.</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">🤖</div>
+        <p>Agente IA</p>
       </div>
-      <div class="stack-card">
-        <div class="stack-logo">✨</div>
-        <div class="stack-name">Gemini 2.5</div>
-        <div class="stack-desc">Velocidad y escala. Procesamiento masivo de datos, scraping y generación de contenido en tiempo real.</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">🔍</div>
+        <p>Scraping + Análisis</p>
       </div>
-      <div class="stack-card">
-        <div class="stack-logo">📊</div>
-        <div class="stack-name">HubSpot CRM</div>
-        <div class="stack-desc">Integración nativa. Todos los leads, seguimientos y datos del cliente se sincronizan automáticamente.</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">📊</div>
+        <p>HubSpot</p>
       </div>
-      <div class="stack-card">
-        <div class="stack-logo">💬</div>
-        <div class="stack-name">WhatsApp + Telegram</div>
-        <div class="stack-desc">Canal de contacto con el cliente y comando central para el asesor. Todo desde su smartphone.</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">👨‍💻</div>
+        <p>Asesor Comercial</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">🤝</div>
+        <p>Cierre de Venta</p>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .flow-section { padding: 100px 40px; background: var(--bg2); }
+  .flow-grid {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .flow-step {
+    text-align: center; max-width: 150px;
+  }
+  .flow-icon {
+    font-size: 2.5rem; margin-bottom: 10px;
+    color: var(--gold);
+  }
+  .flow-step p {
+    font-size: 0.95rem; color: var(--white); font-weight: 500;
+    line-height: 1.4;
+  }
+  .flow-arrow {
+    font-size: 2.5rem; color: var(--gray); font-weight: 300;
+    margin: 0 10px;
+  }
+  @media (max-width: 768px) {
+    .flow-grid { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); margin: 10px 0; }
+  }
+</style>
 
 <!-- ═══ PRICING ═══ -->
 <section class="pricing-section" id="pricing">
@@ -695,18 +719,18 @@
       <div class="pricing-amount">
         <span class="pricing-currency">$</span>20.000
       </div>
-      <p class="pricing-desc">Implementación completa · Licencia anual · Soporte incluido</p>
+      <p class="pricing-desc">Implementación completa · Licencia anual · Soporte incluido. Retorno anual estimado de +$408k, más de 20 veces la inversión recuperada en el primer año.</p>
       <ul class="pricing-features">
         <li>Lead Intelligence Agent (Función 1)</li>
         <li>Agente de Conversión 24/7 (Función 2)</li>
         <li>Hiperpersonalización de Ofertas (Función 3)</li>
         <li>Integración HubSpot + WhatsApp</li>
-        <li>Stack Claude + Gemini + OpenClaw</li>
+
         <li>Dashboard de seguimiento comercial</li>
         <li>Capacitación del equipo de ventas</li>
         <li>Soporte técnico durante implementación</li>
       </ul>
-      <p class="pricing-note">* Equivalente a menos de $2 por lead gestionado al mes (base: 1000 leads/mes)</p>
+
     </div>
   </div>
 </section>
